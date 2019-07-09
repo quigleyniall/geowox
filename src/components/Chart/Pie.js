@@ -8,25 +8,16 @@ class Pie extends React.Component {
     this.state = ({
       chartOptions: {}
     })
-    this.timer = 0;
   }
 
   componentWillMount () {
     this.renderChart();
   }
 
-  componentDidMount () {
-    this.timer = setInterval(() => this.renderChart(), 1000);
-  }
-
   componentWillReceiveProps (nextProps) {
     if (nextProps.pieData) {
       this.renderChart()
     }
-  }
-
-  componentWillUnmount () {
-    clearInterval(this.timer)
   }
 
   renderChart = () => {
