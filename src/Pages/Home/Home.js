@@ -94,7 +94,7 @@ class Home extends React.Component {
       const bedsFilter = beds > 0 ? property.beds === beds : property.beds > 0;
       return bathFilter && bedsFilter && filterType && searchFilter;
     })
-    this.setState({ data: filtered })
+    this.setState({ data: filtered, showPie: false })
   }
 
   onChangeBeds = (beds) => {
@@ -131,7 +131,8 @@ class Home extends React.Component {
         'Semi-Detached',
         'Apartment'
       ],
-      search: 'Dublin'
+      search: 'Dublin',
+      showPie: false
     })
   }
 
