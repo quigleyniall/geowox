@@ -85,7 +85,7 @@ class Map extends Component {
           yesIWantToUseGoogleMapApiInternals
           className="map"
           onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps, data)}
-          bootstrapURLKeys={{ key: process.env.MAP_API_KEY }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_API_KEY }}
         >
           {this.renderMarkers()}
         </GoogleMapReact>
