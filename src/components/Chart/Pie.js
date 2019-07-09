@@ -14,12 +14,6 @@ class Pie extends React.Component {
     this.renderChart();
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.pieData) {
-      this.renderChart()
-    }
-  }
-
   renderChart = () => {
     const { pieData } = this.props;
     const data = {
