@@ -47,11 +47,11 @@ class Map extends Component {
   };
 
   renderMarkers = () => {
-    const { data, loadModal } = this.props;
+    const { data, loadModal, mapPropertyType } = this.props;
     const { markerActive } = this.state;
     return data.map((d) => (
         <div
-        className={ markerActive === d ? `circle circle-hover circle-${d.type} circle-hover-${d.type}` : `circle z-index-low circle-${d.type}` }
+        className={ markerActive === d || mapPropertyType === d.type ? `circle circle-hover circle-${d.type} circle-hover-${d.type}` : `circle z-index-low circle-${d.type}` }
         lat={d.lat}
         lng={d.lon}
         data={d}
