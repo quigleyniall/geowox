@@ -15,7 +15,7 @@ class Pie extends React.Component {
   }
 
   renderChart = () => {
-    const { pieData } = this.props;
+    const { pieData, highlightMapPoints } = this.props;
     const data = {
       "Terraced": 0,
       "Detached": 0,
@@ -53,6 +53,9 @@ class Pie extends React.Component {
               cursor: 'pointer',
               dataLabels: {
                   enabled: false
+              },
+              events: {
+                click: highlightMapPoints ? (e) => highlightMapPoints(e.point.name) : null
               },
             showInLegend: true
           }
