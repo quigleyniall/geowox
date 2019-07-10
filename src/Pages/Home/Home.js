@@ -63,8 +63,15 @@ class Home extends React.Component {
 
   showPie = () => {
     this.setState(prevState => ({
-      showPie: !prevState.showPie
+      showPie: !prevState.showPie,
+      mapPropertyType: prevState.showPie ? '' : prevState.mapPropertyTypeW
     }))
+  }
+
+  highlightMapPoints = (mapPropertyType) => {
+    this.setState(prevState => ({
+      mapPropertyType: prevState.mapPropertyType === mapPropertyType ? '' : mapPropertyType
+    }));
   }
 
   renderSimilar = () => {
@@ -94,7 +101,7 @@ class Home extends React.Component {
       const bedsFilter = beds > 0 ? property.beds === beds : property.beds > 0;
       return bathFilter && bedsFilter && filterType && searchFilter;
     })
-    this.setState({ data: filtered, showPie: false })
+    this.setState({ data: filtered, showPie: false, mapPropertyType: '' })
   }
 
   onChangeBeds = (beds) => {
@@ -132,12 +139,13 @@ class Home extends React.Component {
         'Apartment'
       ],
       search: 'Dublin',
-      showPie: false
+      showPie: false,
+      mapPropertyType: ''
     })
   }
 
   render() {
-    const { data, selectedProperty, hoveredProperty, modal, showPie, beds, baths, typeList, search } = this.state;
+    const { data, selectedProperty, hoveredProperty, modal, showPie, beds, baths, typeList, search, mapPropertyType } = this.state;
     return (
       <div className="wrapper">
         <Nav />
@@ -160,14 +168,14 @@ class Home extends React.Component {
               <div className="results">
                 <span className="results-number">{data.length === 1 ? `${data.length} result found` : `${data.length} results found`}</span>
                 { data.length ? <Button text="View Breakdown of Results" onPress={this.showPie} /> : null }
-                { showPie && data.length ? <Pie pieData={data} /> : null }
+                { showPie && data.length ? <Pie pieData={data} highlightMapPoints={this.highlightMapPoints} /> : null }
               </div>
               <div className="listings-container">
                 {this.renderProperties()}
               </div>
             </div>
             <div className="map-container">
-              <Map data={data} loadModal={this.showModal} showInfoWindow={hoveredProperty} />
+              <Map data={data} loadModal={this.showModal} mapPropertyType={mapPropertyType} showInfoWindow={hoveredProperty} />
             </div>
           </div>
         </div>
